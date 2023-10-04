@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "bdf0da2e-88ee-419d-a77d-dedc5f3d22d5",
+		"name": "Functional",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22898811"
+	},
+	"item": [
+		{
+			"name": "Add Test Book",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Dummy book added to collection.\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"// Verifica si la respuesta tiene una estructura válida\r",
+							"pm.test(\"La respuesta tiene una estructura válida\", function() {\r",
+							"    pm.response.to.have.jsonBody('book');\r",
+							"    pm.response.to.have.jsonBody('book.id');\r",
+							"    pm.response.to.have.jsonBody('book.title');\r",
+							"    pm.response.to.have.jsonBody('book.author');\r",
+							"    pm.response.to.have.jsonBody('book.length');\r",
+							"    pm.response.to.have.jsonBody('book.rating');\r",
+							"});\r",
+							"\r",
+							"// Verifica que el ID sea un número\r",
+							"pm.test(\"El ID es un número\", function() {\r",
+							"    pm.expect(pm.response.json().book.id).to.be.a('number');\r",
+							"});\r",
+							"\r",
+							"// Verifica que los otros campos tengan los valores esperados\r",
+							"pm.test(\"El título es correcto\", function() {\r",
+							"    pm.expect(pm.response.json().book.title).to.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El autor es correcto\", function() {\r",
+							"    pm.expect(pm.response.json().book.author).to.a('string');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"La longitud es correcta\", function() {\r",
+							"    pm.expect(pm.response.json().book.length).to.a('number');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"La calificación es correcta\", function() {\r",
+							"    pm.expect(pm.response.json().book.rating).to.a('number');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Workshop\",\r\n    \"author\": \"Gabeh\",\r\n    \"length\": 120,\r\n    \"rating\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{scheme}}://{{host}}/books",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
