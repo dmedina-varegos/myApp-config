@@ -25,7 +25,7 @@
 							"jsonData.books.forEach(function(book) {\r",
 							"    // Verifica si el valor de \"id\" es de tipo integer\r",
 							"    pm.test(\"El ID del libro '\" + book.title + \"' es de tipo integer\", function() {\r",
-							"        pm.expect(book.id).to.be.an('string');\r",
+							"        pm.expect(book.id).to.be.an('number');\r",
 							"    });\r",
 							"});"
 						],
